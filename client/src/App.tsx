@@ -1,0 +1,46 @@
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import NotFound from "@/pages/NotFound";
+import { Route, Switch } from "wouter";
+import ErrorBoundary from "./components/ErrorBoundary";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import Dashboard from "./pages/Dashboard";
+import Buddies from "./pages/Buddies";
+import NewHires from "./pages/NewHires";
+import Associations from "./pages/Associations";
+import Tasks from "./pages/Tasks";
+import Meetings from "./pages/Meetings";
+
+function Router() {
+  return (
+    <Switch>
+      <Route path={"/"} component={Dashboard} />
+      <Route path={"/buddies"} component={Buddies} />
+      <Route path={"/new-hires"} component={NewHires} />
+      <Route path={"/associations"} component={Associations} />
+      <Route path={"/tasks"} component={Tasks} />
+      <Route path={"/meetings"} component={Meetings} />
+      <Route path={"/404"} component={NotFound} />
+      {/* Final fallback route */}
+      <Route component={NotFound} />
+    </Switch>
+  );
+}
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <ThemeProvider
+        defaultTheme="light"
+        switchable
+      >
+        <TooltipProvider>
+          <Toaster />
+          <Router />
+        </TooltipProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
+  );
+}
+
+export default App;
